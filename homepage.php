@@ -78,7 +78,7 @@ echo $shop_name;?></h2></center>
 <tr>
   <th>ID</th>
   <th>Product Name</th>
-  <th>Quantity Remains</th>
+  <th>Update</th>
   <th>Price Per Least</th>
   <th>Total Cost Remains</th>
   <th>Update</th>
@@ -107,10 +107,12 @@ $price = $row['price'];
   // echo $quantity;  ?></td> -->
   <td>
     <form class="update" action="submit.php" method="POST" target="submit">
-      <input type="text" name="update" class="update" value = "<?php echo $quantity;  ?>"/>
+      <span class="val"><?php echo $quantity;  ?></span>
+      <input type="text" name="update" class="update" value = ""/>
       <input type="text" hidden="true" name="s_no" value="<?php echo($sn); ?>">
       <!-- <i class="material-icons prefix" id="done" title="submit">done</i> -->
-      <input type="submit" name="name" class="done" title="Submit" value="update">
+      <input type="submit" name="plus" onclick="do_it_plus(this)" class="done" title="Submit" value="+">
+      <input type="submit" name="minus" onclick="do_it_minus(this)" class="done" title="Submit" value="-">
     </form>
 
 
@@ -137,27 +139,45 @@ $price = $row['price'];
   <h5>Web Based Stock Inventory System</h5>
 
 </div>
-<iframe src="submit.php" width="0" height="0" name="submit" hidden="true"></iframe>
+<iframe src="submit.php" width="0" height="0" hidden="true" name="submit"></iframe>
 </body>
 <script type="text/javascript">
-  // function do_it(ele)
-  // {
-  //   var inp = document.querySelector('input#update');
-  //   var input = inp.value;
-  //   var td_par = ele.parentElement;
-  //   var tr = td_par.parentElement;
-  //   var remain = tr.children[2];
-  //   if(input != null)
-  //   {
-  //     remain.innerHTML -= input;
-  //     var form = tr.children[5];
-  //     inp.innerHTML = "";
-  //     form.submit();
-  //   }
-  //   else {
-  //     alert('Please enter something and then submit..  :-)');
-  //   }
-  //   //alert(remain.innerHTML);
-  // }
+  function do_it_plus(ele)
+  {
+    // alert('llee');
+    var input = (ele.previousElementSibling).previousElementSibling;
+    var prev = input.previousElementSibling;
+    var prev1 = parseInt(prev.innerHTML);
+    // var input = document.querySelector('input.update');
+    var input1 = parseInt(input.value);
+    if(prev1 > input1)
+    {
+      prev.innerHTML = prev1 + input1;
+      input.value = "";
+    }
+    else {
+      alert("It cannot be updated");
+    }
+    // ele.submit();
+  }
+
+  function do_it_minus(ele)
+  {
+    // alert('llee');
+    var input = ((ele.previousElementSibling).previousElementSibling).previousElementSibling;
+    var prev = input.previousElementSibling;
+    var prev1 = parseInt(prev.innerHTML);
+    // var input = document.querySelector('input.update');
+    var input1 = parseInt(input.value);
+    if(prev1 > input1)
+    {
+      prev.innerHTML = prev1 - input1;
+      input.value = "";
+    }
+    else {
+      alert("It cannot be updated");
+    }
+    // ele.submit();
+  }
 </script>
 </html>
